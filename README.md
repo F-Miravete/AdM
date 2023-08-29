@@ -1,7 +1,10 @@
-# Curso Arquitectura de Microprocesadores 
+# CURSO ESPECIALIZACION SISTEMAS EMBEBIDOS
+	UBA - Facultad de Ingenieria
 
-CESE 2023 - Especializacion en Sistemas Embebidos
+# Materia: Arquitectura de Microprocesadores
+	Profesor: Denis Genero - Santiago Germino
+	Alumno: Flavio Miravete
 
-Repositorio de Flavio Miravete
+	Cohorte #20 Bimestre 4 año 2023
 
-Docentes: Denis Genero - Santiago Germino
+	Se dicta los dias Sabados de 10 a 13 Hs
