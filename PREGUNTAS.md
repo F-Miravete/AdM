@@ -5,7 +5,7 @@
 ## Cortex M 
 
 1.	Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y M4. 
-2.	¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código? Explique 
+2.	¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código? Explique. 
 3.	¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura? 
 4.	¿Cómo es el mapa de memoria de la familia?  
 5.	¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP? 
@@ -37,10 +37,12 @@
 
 ## RESPUESTAS
 
-1) ARM cuenta con 3 familias o perfiles denominados
-    Cortex A (Application)
-    Cortex R (Real time)
-    Cortex M (Microcontroller)
+### Pregunta 1
+    ARM cuenta con 3 familias o perfiles denominados
+
+        Cortex A (Application)
+        Cortex R (Real time)
+        Cortex M (Microcontroller)
 
     Los Cortex A son procesadores de alto rendimiento y se utilizan con sistemas operativos de alta performance (por ej. Android). Permiten alto nivel de paralelismo, pueden contar con mas de un nucleo (multinucleo), corren a alta frecuencia (mayor a 1GHz), incluyen gran cantidad de memoria RAM y tienen memoria CACHE.
 
@@ -50,5 +52,12 @@
 
 ## Cortex M
 
+### Pregunta 1
+    Diferencias entre arquitecturas M0, M3 y M4
 
-
+    | ARM Cortex M | Systick Timer | Bit-Banding | MPU | Mem. Arch. | ARM Arch. |
+    |:-------------|:-------------:|:-----------:|:---:|:----------:|:---------:|
+    | M0           | Optional      | Optional    | NO  | Von neumann| ARMv6-M   |
+    | M3           | YES           | Optional    | Opt | Harvard    | ARMv7-M   |
+    | M4           | YES           | Optional    | Opt | Harvard    | ARMv7E-M  |
+    
