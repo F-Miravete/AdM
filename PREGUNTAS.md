@@ -53,11 +53,11 @@
 ## Cortex M
 
 ### Pregunta 1
-    Diferencias entre arquitecturas M0, M3 y M4
+Diferencias entre arquitecturas M0, M3 y M4
 
-    | ARM Cortex M | Systick Timer | Bit-Banding | MPU | Mem. Arch. | ARM Arch. |
-    |:-------------|:-------------:|:-----------:|:---:|:----------:|:---------:|
-    | M0           | Optional      | Optional    | NO  | Von neumann| ARMv6-M   |
-    | M3           | YES           | Optional    | Opt | Harvard    | ARMv7-M   |
-    | M4           | YES           | Optional    | Opt | Harvard    | ARMv7E-M  |
-    
+| ARM Cortex M | Systick Timer | Bit-Banding | MPU | Mem. Arch. | ARM Arch. |
+|:-------------|:-------------:|:-----------:|:---:|:----------:|:---------:|
+| M0           | Optional      | Optional    | NO  | Von neumann| ARMv6-M   |
+| M3           | YES           | Optional    | Opt | Harvard    | ARMv7-M   |
+| M4           | YES           | Optional    | Opt | Harvard    | ARMv7E-M  |
+
