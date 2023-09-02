@@ -38,8 +38,8 @@
 ### Pregunta 4	
 ### ¿Cómo es el mapa de memoria de la familia?  
 
-![alt text](MemMap1.jpg)
-![alt text](MemMap2.jpg)
+![alt text](MemMap1.JPG)
+![alt text](MemMap2.JPG)
 
 ### Pregunta 5
 ### ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP? 
