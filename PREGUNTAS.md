@@ -53,11 +53,25 @@
 
 ### Pregunta 5
 ### ¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP? 
-
+    La ventaja radica en tener separada la memoria de stack para el codigo que corre en modo privilegiado y el que corre en modo 
+    no provilegiado. Esto permite un mejor manejo del stack para distintos procesos reduciendo la probabilidad de comoter 
+    errores al momento de guardar y recuperar datos en el stack.
 
 ### Pregunta 6	
 ### Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no privilegiado y nuevamente a privilegiado.
-
+    Cortex M posee 2 modos de operacion: Thread Mode y Handler Mode.
+    En modo Thread el codigo se ejecuta de manera normal y en el modo Handler se ejecuta el codigo que pertenece a las rutinas 
+    de exepcion o interrupcion.
+    A su vez, en el modo Thread existen 2 niveles de acceso: uno privilegiado y otro no privilegiado. El modo Handler siempre
+    tiene nivel de acceso privilegiado.
+    Cuando el microcrontrolador arranca amanece en modo  Thread privilegiado, si ocurre una exepcion o interrupcion el micro 
+    pasará a modo Handler y luego de finalizar la atencion de la rutina retornará al codigo principal en modo Thread (ver figura 
+    abajo).
+![Alt text](image-2.png)    
+    El microcrontraldor puede pasar de modo privilegiado a no privilegiado escribiendo el registro de control correspondiente.
+    Estando en modo no privilegiado NO puede volver al modo privilegiado, primero debe pasar al modo Handler y desde alli podra 
+    decidir si retorna al modo no privilegiado o al modo privilegiado (ver siguiente figura).
+![Alt text](image-3.png)
 
 ### Pregunta 7
 ### ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo. 
@@ -77,7 +91,9 @@
 
 ### Pregunta 11
 ### Describa la secuencia de reset del microprocesador.  
-
+    El microcrocontrolador primero de todo inicializa el puntero a la pila, es deir, carla la posicion de memoria de la pila en 
+    el registro r13. Seguido realiza un salto a la direccion de memoria contenida en el vector de reset, esta direccion de memoria 
+    es el inicio del codigo de programa. 
 
 ### Pregunta 12
 ### ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos? 
