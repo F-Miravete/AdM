@@ -1,8 +1,8 @@
-## Preguntas orientadoras 
+# Preguntas orientadoras 
 
 1.	Describa brevemente los diferentes perfiles de familias de microprocesadores/microcontroladores de ARM. Explique alguna de sus diferencias características. 
 
-# Cortex M 
+## Cortex M 
 
 1.	Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y M4. 
 2.	¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código? Explique 
@@ -27,10 +27,28 @@
 21.	¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo.
 22.	¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido. 
 
-# ISA
+## ISA
 
 1.	¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo.
 2.	¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo.
 3.	¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.
 4.	Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados? 
 5.	¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.
+
+## RESPUESTAS
+
+1) ARM cuenta con 3 familias o perfiles denominados
+    Cortex A (Application)
+    Cortex R (Real time)
+    Cortex M (Microcontroller)
+
+    Los Cortex A son procesadores de alto rendimiento y se utilizan con sistemas operativos de alta performance (por ej. Android). Permiten alto nivel de paralelismo, pueden contar con mas de un nucleo (multinucleo), corren a alta frecuencia (mayor a 1GHz), incluyen gran cantidad de memoria RAM y tienen memoria CACHE.
+
+    Lor Cortex R estan orientados a las aplicaciones de tiempo real que requieren baja latencia, alto determinismo y gran capacidad de computo. Se adecuan a las aplicaciones de sistemas criticos en industrias como medicina y automotor.
+
+    Los Cortex M son procesadores de proposito general, orientados a sistemas embebidos compactos y de consumo masivo. Pueden correr gran cantidad de codigo y se los puede programar integramente en C.
+
+## Cortex M
+
+
+
