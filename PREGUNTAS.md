@@ -8,11 +8,15 @@
         Cortex R (Real time)
         Cortex M (Microcontroller)
 
-    Los Cortex A son procesadores de alto rendimiento y se utilizan con sistemas operativos de alta performance (por ej. Android). Permiten alto nivel de paralelismo, pueden contar con mas de un nucleo (multinucleo), corren a alta frecuencia (mayor a 1GHz), incluyen gran cantidad de memoria RAM y tienen memoria CACHE.
+    Los Cortex A son procesadores de alto rendimiento y se utilizan con sistemas operativos de alta performance (por ej. Android).
+    Permiten alto nivel de paralelismo, pueden contar con mas de un nucleo (multinucleo), corren a alta frecuencia (mayor a 1GHz),
+    incluyen gran cantidad de memoria RAM y tienen memoria CACHE.
 
-    Lor Cortex R estan orientados a las aplicaciones de tiempo real que requieren baja latencia, alto determinismo y gran capacidad de computo. Se adecuan a las aplicaciones de sistemas criticos en industrias como medicina y automotor.
+    Lor Cortex R estan orientados a las aplicaciones de tiempo real que requieren baja latencia, alto determinismo y gran 
+    capacidad de computo. Se adecuan a las aplicaciones de sistemas criticos en industrias como medicina y automotor.
 
-    Los Cortex M son procesadores de proposito general, orientados a sistemas embebidos compactos y de consumo masivo. Pueden correr gran cantidad de codigo y se los puede programar integramente en C.
+    Los Cortex M son procesadores de proposito general, orientados a sistemas embebidos compactos y de consumo masivo. Pueden 
+    correr gran cantidad de codigo y se los puede programar integramente en C.
 
 ## Cortex M
 
@@ -28,12 +32,18 @@
 
 ### Pregunta 2
 ### ¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código? Explique.
-    Las intrucciones Thumb son instrucciones de 16 bits de longitud, la mitad de lo que ocupa el juego de instrucciones estandard de ARM. Las instrucciones Thumb son las que se utilizan con mayor frecuencia y al ocupar solo 2 bytes disminuyen la cantidad de memoria de codigo mejorando su densidad. 
+    Las intrucciones Thumb son instrucciones de 16 bits de longitud, la mitad de lo que ocupa el juego de instrucciones estandard
+    de ARM. Las instrucciones Thumb son las que se utilizan con mayor frecuencia y al ocupar solo 2 bytes disminuyen la cantidad 
+    de memoria de codigo mejorando su densidad. 
 
 ### Pregunta 3
 ### ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura? 
-    La arquitectura load-store refiere a que cualquier operacion que se quiera realizar con datos guardados en memoria, primero deben ser cargados en registros del procesador (load) luego realizar la operacion y finalmente almacenar el resultado en memoria (store). 
-    Este tipo de arquitectura no permite hacer operaciones con los datos en memoria de forma directa. Es decir, si quisiera sumar lo que tengo en Mem1 y Mem2 y el resultado guardarlo en Mem3, debo primero cargar Mem1 y Mem2 en 2 registros, la suma se guardará en registro y luego se deberá mover este ultimo registro a Mem3.
+    La arquitectura load-store refiere a que cualquier operacion que se quiera realizar con datos guardados en memoria, primero 
+    deben ser cargados en registros del procesador (load) luego realizar la operacion y finalmente almacenar el resultado en 
+    memoria (store). 
+    Este tipo de arquitectura no permite hacer operaciones con los datos en memoria de forma directa. Es decir, si quisiera sumar 
+    lo que tengo en Mem1 y Mem2 y el resultado guardarlo en Mem3, debo primero cargar Mem1 y Mem2 en 2 registros, la suma se 
+    guardará en registro y luego se deberá mover este ultimo registro a Mem3.
 
 ### Pregunta 4	
 ### ¿Cómo es el mapa de memoria de la familia?  
