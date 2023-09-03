@@ -8,14 +8,14 @@
         Cortex R (Real time)
         Cortex M (Microcontroller)
 
-    Los Cortex A son procesadores de alto rendimiento y se utilizan con sistemas operativos de alta performance (por ej. Android).
-    Permiten alto nivel de paralelismo, pueden contar con mas de un nucleo (multinucleo), corren a alta frecuencia (mayor a 1GHz),
-    incluyen gran cantidad de memoria RAM y tienen memoria CACHE.
+    Los Cortex A son procesadores de alto rendimiento y se utilizan con sistemas operativos de alta performance (por ej. 
+    Android). Permiten alto nivel de paralelismo, pueden contar con mas de un nucleo (multinucleo), corren a alta frecuencia
+    (mayor a 1GHz), incluyen gran cantidad de memoria RAM y tienen memoria CACHE.
 
     Lor Cortex R estan orientados a las aplicaciones de tiempo real que requieren baja latencia, alto determinismo y gran 
     capacidad de computo. Se adecuan a las aplicaciones de sistemas criticos en industrias como medicina y automotor.
 
-    Los Cortex M son procesadores de proposito general, orientados a sistemas embebidos compactos y de consumo masivo. Pueden 
+    Los Cortex M son procesadores de proposito general, orientados a sistemas embebidos compactos y de consumo masivo. Pueden
     correr gran cantidad de codigo y se los puede programar integramente en C.
 
 ## Cortex M
@@ -38,12 +38,12 @@
 
 ### Pregunta 3
 ### ¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura? 
-    La arquitectura load-store refiere a que cualquier operacion que se quiera realizar con datos guardados en memoria, primero 
-    deben ser cargados en registros del procesador (load) luego realizar la operacion y finalmente almacenar el resultado en 
+    La arquitectura load-store refiere a que cualquier operacion que se quiera realizar con datos guardados en memoria, primero
+    deben ser cargados en registros del procesador (load) luego realizar la operacion y finalmente almacenar el resultado en
     memoria (store). 
-    Este tipo de arquitectura no permite hacer operaciones con los datos en memoria de forma directa. Es decir, si quisiera sumar 
-    lo que tengo en Mem1 y Mem2 y el resultado guardarlo en Mem3, debo primero cargar Mem1 y Mem2 en 2 registros, la suma se 
-    guardará en registro y luego se deberá mover este ultimo registro a Mem3.
+    Este tipo de arquitectura no permite hacer operaciones con los datos en memoria de forma directa. Es decir, si quisiera
+    sumar lo que tengo en Mem1 y Mem2 y el resultado guardarlo en Mem3, debo primero cargar Mem1 y Mem2 en 2 registros, la suma
+    se guardará en registro y luego se deberá mover este ultimo registro a Mem3.
 
 ### Pregunta 4	
 ### ¿Cómo es el mapa de memoria de la familia?  
@@ -68,9 +68,11 @@
     pasará a modo Handler y luego de finalizar la atencion de la rutina retornará al codigo principal en modo Thread (ver figura 
     abajo).
 ![Alt text](image-2.png)    
+    
     El microcrontraldor puede pasar de modo privilegiado a no privilegiado escribiendo el registro de control correspondiente.
     Estando en modo no privilegiado NO puede volver al modo privilegiado, primero debe pasar al modo Handler y desde alli podra 
     decidir si retorna al modo no privilegiado o al modo privilegiado (ver siguiente figura).
+
 ![Alt text](image-3.png)
 
 ### Pregunta 7
@@ -83,21 +85,37 @@
 
 ### Pregunta 9
 ### Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
-
+    Reset: se ejecuta al iniciar el microcrontrolador (al momento de ser energizado).
+    NMI: es la interrupcion no enmascarable, normalmente se le asocian funciones para controlar el sistema: el Watch Dog Timer 
+    o el brownout detector.
+    Hardfault: esta excepcion ocurre ante toda clase de falla interna del procesador como uso indebido de memoria
+    dinamica, inicializacion incorrecta de perfericos, etc.  
 
 ### Pregunta 10
 ### Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?
-
+    La pila puede:
+        
+        - Guardar variables locales
+        - Pasar datos a funciones o subrutinas
+        - Guardar el estado del procesador y de los registros de proposito general cuando ocurre un cambio de contexto, 
+          esto se conoce com "stacking"
+    
+    Cuando hay un llamado a funcion el controlador guarda en la pila los registros del procesador y la direccion de retorno.
+    Luego ejecuta la funcion y a su retorno recupera de la pila la direccion donde debe retornar y los registros del procesador
+    asegurando que las condiciones sigan siendo las mismas anted de la llamada a la funcion. 
 
 ### Pregunta 11
 ### Describa la secuencia de reset del microprocesador.  
-    El microcrocontrolador primero de todo inicializa el puntero a la pila, es deir, carla la posicion de memoria de la pila en 
-    el registro r13. Seguido realiza un salto a la direccion de memoria contenida en el vector de reset, esta direccion de memoria 
-    es el inicio del codigo de programa. 
+    El microcrocontrolador primero de todo inicializa el puntero a la pila, es deir, carla la posicion de memoria de la pila en
+    el registro r13. Seguido realiza un salto a la direccion de memoria contenida en el vector de reset, esta direccion de 
+    memoria es el inicio del codigo de programa. 
 
 ### Pregunta 12
 ### ¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos? 
-
+    Core peripheral se refiere a los perifericos que posee el microprocesador ARM en su nucleo (por ej. NIVIC, SysTick Timer, 
+    MPU, FPU, DSP). 
+    El resto de los perifericos son todos aquellos que estan por fuera del nucleo de ARM y que agrega el fabricante del 
+    microcontrolador como por ej. UART, I2C, SPI, DMA etc. 
 
 ### Pregunta 13
 ### ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo.
@@ -105,7 +123,9 @@
 
 ### Pregunta 14
 ### ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?
-
+    CMSIS es un conjunto de librerias que implementan una capa de abstraccion de hardware para los Cortex M.
+    Estas librerias estan escritas en C, las provee ARM y brindan funciones para interectuar con los perfericos del nucleo
+    (Core peripherals) asi como para interactuar con un RTOS (Real Time Operating System) 
 
 ### Pregunta 15
 ### Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo.
@@ -113,11 +133,23 @@
 
 ### Pregunta 16
 ### ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
-
+    Cuando se utiliza la FPU el controlador debe guardar en el stack mas registros. A R0-R3, R12, LR, xPSR se suman los 
+    registros S0-S15, FPSCR.
 
 ### Pregunta 17
 ### Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival.
+    Tail chaining: este mecanismo actua cuando al estar ejecutandose una rutina de interrupcion aparece otra interrupcion de
+    igual o menor prioridad. El controlador terminará de ejecutar la rutina de la primera interrpcion y luego ejecutará la 
+    rutina de la segunda interrupcion. No se hace un cambio de contexto porque no es necesario.
 
+![Alt text](image-4.png)    
+    
+    Late arrival: este mecanismo actua cuando al momento de estar realizando el stacking de una interrupcion aparece otra 
+    interrupcion de mayor prioridad. El controlador terminará de realizar el stacking, luego atenderá la rutina de la 
+    interrupcion de mayor priridad y luego a traves del mecanismo tail chaining terminará atendiendo la rutina de la 
+    primer interrupcion (de menor prioridad).
+
+![Alt text](image-5.png)
 
 ### Pregunta 18
 ### ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?
