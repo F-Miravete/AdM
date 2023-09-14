@@ -204,7 +204,7 @@
     8) Cuando sale de la excepción SYSTICK, regresa a la rutina de interrupción.
     9) Cuando se completa la rutina de interrupción, el PendSV se inicia y realiza las operaciones de cambio de contexto.
     10) Cuando se completa PendSV, el programa vuelve al modo thread para retomar la ejecucion de la tarea A.
-     
+
 ![Alt text](image-6.png)
 
     
@@ -219,7 +219,21 @@
 
 ### Pregunta 1.	
 ### ¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo.
+    Los sufijos son codigos que se colocan a continuación de una instrucción en assembly y se los utiliza para:
+    
+    1) Actualizar el registro de estados (APSR) cuando se ejecuta una instrucción (sufijo S).
+    2) Para ejecutar una instrucción de forma condicional (sufijo EQ, NE, CS, CC, MI, PL, VS, VC, HI, LS, GE, LT, GT, LE).
+    3) Seleccionar el uso de instrucciones de 16 bit o 32 bits (sufijo .N , .W).
 
+    Por ejemplo, para el caso 1:
+        '''A
+        MOV  R0, R1 ; mueve R1 a R0 y no actualiza APSR
+        MOVS R0, R1 ; mueve R1 a R0 y actualiza APSR
+        '''
+    Para el caso 2:
+        '''A
+        ADDEQ R0, R1, R2  ; ejecuta R0=R1+R2 solo si el resultado de la operacion previa seteó el flag "Equal" en 1
+        '''
 
 ### Pregunta 2	
 ### ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo.
