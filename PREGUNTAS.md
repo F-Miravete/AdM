@@ -148,7 +148,7 @@
     3) El procesador ejecuta la Rutina de Servicio de Interrupción (ISR) y, opcionalmente, borrar la solicitud de interrupción 
        mediante software si es necesario.
     4) El procesador reanuda la tarea previamente suspendida.
-    
+
 ### Pregunta 16
 ### ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
     Cuando se utiliza la FPU el controlador debe guardar en el stack mas registros. A R0-R3, R12, LR, xPSR se suman los 
@@ -193,8 +193,7 @@
 ### Pregunta 21
 ### ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo.
     La excepcion PendSV se utiliza para realizar el cambio de contexto en un sistema operativo (cambio de tareas).
-    Veamos un ejemplo:
-![Alt text](image-6.png)
+    Veamos un ejemplo:  
     1) La tarea A llama a SVC para realizar un cambio de tarea.
     2) El sistema operativo recibe la solicitud, se prepara para el cambio de contexto y espera la Excepción PendSV.
     3) Cuando la CPU sale de SVC, ingresa inmediatamente a PendSV y realiza el cambio de contexto.
@@ -204,14 +203,17 @@
     7) El sistema operativo lleva a cabo su operación, luego espera la excepción PendSV y se prepara para el cambio de contexto.
     8) Cuando sale de la excepción SYSTICK, regresa a la rutina de interrupción.
     9) Cuando se completa la rutina de interrupción, el PendSV se inicia y realiza las operaciones de cambio de contexto.
-    10) Cuando se completa PendSV, el programa vuelve al modo thread para retomar la ejecucion de la tarea A. 
+    10) Cuando se completa PendSV, el programa vuelve al modo thread para retomar la ejecucion de la tarea A.
+     
+![Alt text](image-6.png)
 
+    
 ### Pregunta 22
 ### ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.
     La excepción SVC es una excepción por software que se llama a traves de la instrucción SVC. Los sistemas operativos la 
     utilizan para el llamado a funciones propias del S.O. o para acceder al uso de recursos de un sistema desde una aplicacion 
     (Device Driver).
-    ![Alt text](image-7.png)
+![Alt text](image-7.png)
 
 ## ISA
 
