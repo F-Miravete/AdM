@@ -77,11 +77,21 @@
 
 ### Pregunta 7
 ### ¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo. 
-
+    El modelo de registros ortogonal significa que cualquier instruccion que pueda aplicarse a un registro también puede 
+    aplicarse a cualquier otro registro. Esto es valido para los registros r0 a r13. En cambio existen instrucciones que
+    tratan a r14 y r15 de manera diferente.
 
 ### Pregunta 8	
 ### ¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo. 
+    Esta instruccion permite realizar el control de flujo del programa sin romper el pipeline. Por ejemplo:
 
+    ITET GT
+    ADDGT R0,R0,R1
+    ADDLE R0,R0,R2
+    ADDGT R5,R6,#5 
+
+    Si el Flag GT es "1" se ejecuta el primer ADD y el tercer ADD (ADDGT R0,R0,R1 y ADDGT R5,R6,#5) , sino, 
+    se ejecuta solo el segundo ADD (ADDLE R0,R0,R2)
 
 ### Pregunta 9
 ### Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
@@ -119,7 +129,11 @@
 
 ### Pregunta 13
 ### ¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo.
-
+    Los cortex-M3/M4 soportan tres niveles de prioridad fijos (los mas altos) y hasta 256 niveles de prioridad programables.
+    Normalmente en la mayoria de los sistemas se necesitan algunos pocos niveles de prioridad. La cantidad de niveles se 
+    puede ajustar en 4, 8, 16, 32 ..... hasta el maximo. Para esto se configura un registro de nivel de prioridad.
+    Tambien se pueden configurar sub-prioridades. La sub-prioridad es usada cuando 2 interrupciones del mismo nivel de
+    prioridad ocurren al mismo tiempo, en este caso se ejecutará primero la que tenga mayor sub-prioridad.  
 
 ### Pregunta 14
 ### ¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?
@@ -129,8 +143,12 @@
 
 ### Pregunta 15
 ### Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo.
-
-
+    1) Se envía una solicitud de interrupción al procesador.
+    2) El procesador suspende la tarea que se está ejecutando actualmente.
+    3) El procesador ejecuta la Rutina de Servicio de Interrupción (ISR) y, opcionalmente, borrar la solicitud de interrupción 
+       mediante software si es necesario.
+    4) El procesador reanuda la tarea previamente suspendida.
+    
 ### Pregunta 16
 ### ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
     Cuando se utiliza la FPU el controlador debe guardar en el stack mas registros. A R0-R3, R12, LR, xPSR se suman los 
@@ -153,22 +171,47 @@
 
 ### Pregunta 18
 ### ¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?
-
+    El systick es un temporizador integrado dentro del nucleo ARM y tiene una longitud de 24 bits. Ya por el hecho de estar 
+    integrado en el nucleo del microprocesador cualquier fabricante que implemente su microcontrolador con un nucleo ARM permitirá 
+    su uso favoreciendo la portabilidad de los sistemas operativos o programas que lo utilicen.
 
 ### Pregunta 19
 ### ¿Qué funciones cumple la unidad de protección de memoria (MPU)?
-
+    La MPU tiene como funcion principal proteger el acceso a memoria. De esta manera podemos:
+        - Prevenir que las aplicaciones (tareas) accedan a zonas de memoria de otras aplicaciones o del kernel de un SO.
+        - Prevenir que las aplicaciones accedan a periféricos sin los permisos adecuados.
+        - Evitar que se ejecute código desde zonas no permitidas (ejemplo desde la RAM).
 
 ### Pregunta 20
 ### ¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las regiones definidas?
-
+    Se pueden configurar hasta 8 regiones de memoria.
+    El solapamiento de regiones esta permitido. Las direcciones de memoria solapadas mantendrán sus atributos de acceso y 
+    permisos iguales a los de la region de numero mas alto.
+    Si la MPU esta habilitada, la zona de memoria que no este cubierta por alguna zona definida quedará inutilizada. Es decir al
+    querer acceder a una direccion de memoria no definida en la MPU se disparará una excepción por falla.      
 
 ### Pregunta 21
 ### ¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo.
-
+    La excepcion PendSV se utiliza para realizar el cambio de contexto en un sistema operativo (cambio de tareas).
+    Veamos un ejemplo:
+![Alt text](image-6.png)
+    1) La tarea A llama a SVC para realizar un cambio de tarea.
+    2) El sistema operativo recibe la solicitud, se prepara para el cambio de contexto y espera la Excepción PendSV.
+    3) Cuando la CPU sale de SVC, ingresa inmediatamente a PendSV y realiza el cambio de contexto.
+    4) Cuando PendSV finaliza y regresa al modo thread y ejecuta la tarea B.
+    5) Se produce una interrupción.
+    6) Mientras se ejecuta la rutina de interrupciones, se produce una excepción SYSTICK.
+    7) El sistema operativo lleva a cabo su operación, luego espera la excepción PendSV y se prepara para el cambio de contexto.
+    8) Cuando sale de la excepción SYSTICK, regresa a la rutina de interrupción.
+    9) Cuando se completa la rutina de interrupción, el PendSV se inicia y realiza las operaciones de cambio de contexto.
+    10) Cuando se completa PendSV, el programa vuelve al modo thread para retomar la ejecucion de la tarea A. 
 
 ### Pregunta 22
 ### ¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.
+    La excepción SVC es una excepción por software que se llama a traves de la instrucción SVC. Los sistemas operativos la 
+    utilizan para el llamado a funciones propias del S.O. o para acceder al uso de recursos de un sistema desde una aplicacion 
+    (Device Driver).
+    ![Alt text](image-7.png)
 
 ## ISA
 
