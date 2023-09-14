@@ -226,31 +226,30 @@
     3) Seleccionar el uso de instrucciones de 16 bit o 32 bits (sufijo .N , .W).
 
     Por ejemplo, para el caso 1:
-´´´A
+
 MOV  R0, R1 ; mueve R1 a R0 y no actualiza APSR
 MOVS R0, R1 ; mueve R1 a R0 y actualiza APSR
-´´´
+
     Para el caso 2:
-´´´A
+
 ADDEQ R0, R1, R2  ; ejecuta R0=R1+R2 solo si el resultado de la operacion previa seteó el flag "Equal" en 1
-´´´
+
 
 ### Pregunta 2	
 ### ¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo.
     Se utiliza para actualizar el registro de estados (APSR) cuando se ejecuta una instrucción.
-'''A
+
 MOV  R0, #0x0A10 ; mueve valor a R0 y no actualiza APSR
 MOVS R0, #0x0A10 ; mueve valor a R0 y actualiza APSR
-'''
+
 
 ### Pregunta 3
 ### ¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.
     Las instrucciones de aritmética saturada evitan que se produzca un overflow manteniendo un valor entre su máximo y su minimo.
     Por ejemplo:
 
-´´´C
 SSAT R1, #8, R0  ; Toma el registro R0 y lo mueve al registro R1 con R0 > 127 ==> R1=127 / R0 < -128 ==> R=-128
-´´´
+
 
 ### Pregunta 4	
 ### Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados? 
