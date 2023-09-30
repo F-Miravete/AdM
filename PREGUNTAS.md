@@ -253,7 +253,28 @@
 
 ### Pregunta 4	
 ### Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados? 
+    El compilador admite archivos fuentes con extension .S. Estos archivos contienen funciones en codigo assembly. Las funciones 
+    en assembly tienen el siguiente prototipo:
+        void func_assembly( type_A param_A, type_B param_B, type_C param_C, type_D param_D )
+    La funcion es llamada desde C y puede utilizar hasta 4 parametros que son transferidos a los registros r0, r1, r2 y r3 
+    respectivamente. El registro r0 se utiliza como argumento de retorno.
+    Los registros r0 a r3 son guardados automáticamente en la pila cuando se produce el llamado a la función en assembly, luego 
+    si la funcion requiere el uso de r4 a r12 será necesario hacer el PUSH y POP de los registros usados de forma explícita en 
+    la función.   
 
 
 ### Pregunta 5	
 ### ¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.
+    Las instrucciones SIMD tienen la particularidad de realizar operaciones con multiples datos en un solo ciclo de instrucción.
+    SIMD significa Single Instruction Multiple Data. Las instrucciones estan orientadas al manejo de técnicas de procesamiento 
+    de señales digitales (DSP, Digital Signal Processing).
+
+    Por ejemplo:
+
+        SHADD16 R0, R1, R2      // Suma la parte alta R1 con la parte alta de R2, divide la suma por 2 y guarda el resultado 
+                                // en parte la parte alta de R0.
+                                // Lo mismo hace con las partes baja de los tres registros.
+
+    En la figura 8 se muestra una representación gráfiva de la instrucción SHADD16.                            
+
+![Alt text](image-8.png)
